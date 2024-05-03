@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import express from 'express';
+import winston from 'winston';
+
 const router = express.Router();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -12,10 +14,16 @@ let jsonData; // Global variable to store JSON data
 // Read the JSON file and store its contents in the global variable
 fs.readFile(dbPath, 'utf-8', function (err, data) {
   if (err) {
-    console.error(err);
-    return res.status(500).json({ error: 'Error reading JSON data' });
+    winston.error(err);
+    throw err;
   }
   jsonData = JSON.parse(data);
+});
+
+// Error handling middleware
+router.use((err, req, res, next) => {
+  winston.error(err); // Log error
+  res.status(500).json({ error: 'Something went wrong' });
 });
 
 // Helper function to convert time string to float
@@ -252,25 +260,25 @@ router.put('/orders/mark-as-processed/:orderId', (req, res) => {
   });
 });
 
-//  Endpoint to DELETE orrders
+//  Endpoint to DELETE orders
 router.delete('/orders/delete/:orderId', (req, res) => {
   const orderId = req.params.orderId
   if (!orderId) {
     return  res.status(400).json({ error: 'An ID must be provided'})
   }
-  console.log('DELETE route hit')
+  winston.info('DELETE route hit');
   // Modify data  
   const updatedData = jsonData.filter(order => orderId != order.id)
   // stringify contents and re-save file
   fs.writeFile(dbPath, JSON.stringify(updatedData), function(err) {
     if (err) {
-      console.error(err)
+      winston.error(err)
       return res.status(500).json(err)
     }
-    console.log('Data written to file successfully')
+    winston.info('Data written to file successfully');
     res.json({ message: 'Order has been deleted!' });
   })
-})
+});
 
 
 export default router

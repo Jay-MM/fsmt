@@ -133,8 +133,18 @@ container.querySelectorAll('.delete-button').forEach(button => {
 // Function to fetch and render orders for all dates
 const fetchAndRenderAllOrders = () => {
   Promise.all([
-    fetch(`/api/orders/payment/pending`).then(response => response.json()),
-    fetch(`/api/orders/payment/processed`).then(response => response.json())
+    fetch(`/api/orders/payment/pending`).then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    }),
+    fetch(`/api/orders/payment/processed`).then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
   ])
     .then(([pendingOrders, processedOrders]) => {
       renderOrders(pendingOrders, pendingOrdersContainer);
@@ -149,8 +159,18 @@ const fetchAndRenderOrdersByDate = (selectedDate) => {
     fetchAndRenderAllOrders();
   } else {
     Promise.all([
-      fetch(`/api/orders/payment/pending?date=${selectedDate}`).then(response => response.json()),
-      fetch(`/api/orders/payment/processed?date=${selectedDate}`).then(response => response.json())
+      fetch(`/api/orders/payment/pending?date=${selectedDate}`).then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      }),
+      fetch(`/api/orders/payment/processed?date=${selectedDate}`).then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
     ])
       .then(([pendingOrders, processedOrders]) => {
         renderOrders(pendingOrders, pendingOrdersContainer);
@@ -163,7 +183,12 @@ const fetchAndRenderOrdersByDate = (selectedDate) => {
 // Fetch and populate dates, and handle selection change
 const fetchAndPopulateDates = () => {
   fetch('/api/orders/dates')
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
     .then(dates => {
       const select = document.getElementById('sales-date-select');
       select.innerHTML = ''; // Clear existing options
