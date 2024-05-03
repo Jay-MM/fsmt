@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FSMT: Order Queue</title>
+    <link rel="stylesheet" href="../css/style.css"/>
+  </head>
+  <body>
+    <header>
+      <h1>Orders<span> Hub</span></h1>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="../pages/how-to.html">Getting Started</a>
+      </nav>
+    </header>
+    <!-- Payment Pending Section -->
+    <div class="grouping-div">
+    <div class="sales-date">
+      <label for="sales-date">View sales data for a specific date:</label>
+      <select id="sales-date-select" name="sales-date">
+        <option value="all">All Orders</option>
+        <!-- Options will be dynamically populated -->
+      </select>
+    </div>
+    <section class="new-order-section">
+      <button class="new-order-btn" id="open-modal-btn">+New Order</button>
+      <form id="modal-form" class="modal" style="display: none;">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <!-- Your form elements go here -->
+          <div class="form-group">
+            <label for="customer_name">Customer Name:</label>
+            <input type="text" id="customer_name" name="customer_name">
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description">
+          </div>
+          <div class="form-group">
+            <label for="order_notes">Notes:</label>
+            <input type="text" id="order_notes" name="order_notes">
+          </div>
+          <div class="form-group">
+            <label for="delivery">Delivery:</label>
+            <input type="checkbox" id="delivery" name="delivery">
+          </div>
+          <div class="form-group">
+            <label for="promised_time">Promised Time (h:mm):</label>
+            <input type="number" id="hours" name="hours" min="1" max="12" placeholder="HH" required>
+            <span>:</span>
+            <input type="number" id="minutes" name="minutes" min="0" max="59" placeholder="MM" required>
+            <select name="meridian">
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date">
+          </div>
+          <!-- Hidden input fields for default values -->
+          <input type="hidden" id="status" name="status" value="pending">
+          <input type="hidden" id="payment" name="payment" value="pending">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+      
+    </section>
+  </div>
+  
+  <h2>Payment Pending:</h2>
+  <section class="table-container" id="pending-orders-container">
+    <table>
+      <!-- Table content here -->
+    </table>
+  </section>
+  
+  <!-- Payment Processed Section -->
+  <h2>Payment Processed:</h2>
+  <section class="table-container" id="processed-orders-container">
+    <table>
+      <!-- Table content here -->
+    </table>
+  </section>
+  
+  <script src="../js/orders.js"></script>
+  <script src="../js/add-order.js"></script>
+</body>
+</html>

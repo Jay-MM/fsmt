@@ -1,0 +1,199 @@
+/* CSS for table container */
+.table-container {
+  overflow-x: auto; /* Enable horizontal scrolling when needed */
+}
+
+/* Rest of your CSS */
+body {
+  background-color: rgb(253, 253, 253);
+  color: rgb(0, 0, 0);
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #f0f0f0;
+  padding: 20px;
+  text-align: center;
+}
+
+.grouping-div {
+	display: flex;
+	justify-content: space-between;
+}
+
+/* Modal container */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.664);
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* Close button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Form group */
+.form-group {
+  margin-bottom: 20px;
+}
+
+input[type="number"],
+#meridian-select { /* Target the meridian select box specifically using its ID */
+  width: 40px; /* Adjust this value as needed */
+  margin-right: 5px; /* Optional: Add some space between the input fields */
+}
+
+/* Align the meridian select element with the hour and minute input fields */
+#meridian-select { /* Target the meridian select box specifically using its ID */
+  width: auto; /* Set width to auto to fit the content */
+  margin-right: 5px; /* Optional: Add some space between the input fields */
+}
+
+/* Label */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Input field */
+input[type="text"] {
+  width: calc(100% - 12px);
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  margin-right: 10px;
+}
+
+.new-order-section, .select-section {
+  padding: 10px;
+  text-align: center;
+}
+
+.new-order-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.select-section select {
+  padding: 8px;
+  font-size: 16px;
+}
+
+#processed-orders-container, #pending-orders-container , #orders-container {
+  margin-top: 20px;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: separate;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #ffffff;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #e6f3ff;
+}
+
+.completed {
+  background-color: rgba(0, 207, 0, 0.247) !important; /* Background color for completed orders */
+}
+
+.complete-btn {
+  background-color: rgba(0, 207, 0, 0.247);
+  font-size: large;
+  padding: 9px;
+  border-radius: 12px;
+}
+
+.complete-btn.enabled {
+  cursor: pointer;
+  background-color: rgba(94, 207, 94, 0.534);
+  border-color: rgba(2, 51, 212, 0.726);
+}
+
+.delete-button {
+  background-color: #912512; /* Red delete button */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.delete-button:hover {
+  background-color: #d6341f; /* Darker red on hover */
+}
+
+.processed-button {
+  background-color: rgba(48, 145, 39, 0.548);
+  color: rgb(255, 255, 0);
+  text-shadow: black 1px 1px;
+  border: none;
+  padding: 5px 18px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: black 0 0 3px;
+  -webkit-text-stroke-width: .5px; /* Width of the outline */
+  -webkit-text-stroke-color: black; /* Color of the outline */
+}
+
+.processed-button:hover {
+  background-color: rgba(48, 145, 39, 0.733);
+  box-shadow: rgb(251, 255, 0) 0 1px 1px;
+}
