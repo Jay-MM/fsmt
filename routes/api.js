@@ -185,11 +185,11 @@ router.get('/orders/status-:status', (req, res) => {
 });
 
 // Endpoint to mark orders as complete
-router.put('/orders/mark-as-complete/:orderId', (req, res) => {
-  const orderId = parseInt(req.params.orderId);
+router.put('/orders/mark-as-complete/:id', (req, res) => {
+  const id = parseInt(req.params.id);
   
   // Find the order by its ID
-  const orderIndex = jsonData.findIndex(order => order.id === orderId);
+  const orderIndex = jsonData.findIndex(order => order.id === id);
   
   if (orderIndex === -1) {
     return res.status(404).json({ error: 'Order not found' });
@@ -236,11 +236,11 @@ router.get('/orders/payment/:paymentStatus', (req, res) => {
 });
 
 // Endpoint to mark orders as processed
-router.put('/orders/mark-as-processed/:orderId', (req, res) => {
-  const orderId = parseInt(req.params.orderId);
+router.put('/orders/mark-as-processed/:id', (req, res) => {
+  const id = parseInt(req.params.id);
   
   // Find the order by its ID
-  const orderIndex = jsonData.findIndex(order => order.id === orderId);
+  const orderIndex = jsonData.findIndex(order => order.id === id);
   
   if (orderIndex === -1) {
     return res.status(404).json({ error: 'Order not found' });
@@ -261,23 +261,42 @@ router.put('/orders/mark-as-processed/:orderId', (req, res) => {
 });
 
 //  Endpoint to DELETE orders
-router.delete('/orders/delete/:orderId', (req, res) => {
-  const orderId = req.params.orderId
-  if (!orderId) {
-    return  res.status(400).json({ error: 'An ID must be provided'})
+router.delete('/orders/delete/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  
+  // Check if an id is provided
+  if (!id) {
+    return res.status(400).json({ error: 'We need an id' });
   }
-  winston.info('DELETE route hit');
-  // Modify data  
-  const updatedData = jsonData.filter(order => orderId != order.id)
-  // stringify contents and re-save file
-  fs.writeFile(dbPath, JSON.stringify(updatedData), function(err) {
+
+  // Read the JSON file
+  fs.readFile(dbPath, 'utf8', function(err, data) {
     if (err) {
-      winston.error(err)
-      return res.status(500).json(err)
+      winston.error(err);
+      return res.status(500).json({ error: 'Error reading file' });
     }
-    winston.info('Data written to file successfully');
-    res.json({ message: 'Order has been deleted!' });
-  })
+    
+    let jsonData = JSON.parse(data);
+
+    // Check if an order with the specified id exists
+    const orderIndex = jsonData.findIndex(order => order.id === id);
+    if (orderIndex === -1) {
+      return res.status(404).json({ error: 'Order with the provided id does not exist' });
+    }
+    winston.info('DELETE route hit');
+    // Filter out the order with the specified ID
+    const updatedJsonData = jsonData.filter(order => order.id !== id);
+    
+    // Write the updated JSON data back to the file
+    fs.writeFile(dbPath, JSON.stringify(updatedJsonData), function(err) {
+      if (err) {
+        winston.error(err);
+        return res.status(500).json({ error: 'Error writing to file' });
+      }
+      winston.info('Data written to file successfully');
+      res.json({ message: 'Order has been deleted!' });
+    });
+  });
 });
 
 

@@ -84,10 +84,10 @@ const renderOrders = (orders, container) => {
   // Attach event listeners to buttons
   container.querySelectorAll('.processed-button').forEach(button => {
     button.addEventListener('click', () => {
-      const orderId = button.dataset.id;
-      console.log('Processing order:', orderId);
+      const id = button.dataset.id;
+      console.log('Processing order:', id);
       // Make API call to mark orders as processed and refresh the table
-      fetch(`/api/orders/mark-as-processed/${orderId}`, {
+      fetch(`/api/orders/mark-as-processed/${id}`, {
         method: 'PUT'
       })
         .then(response => {
@@ -102,14 +102,14 @@ const renderOrders = (orders, container) => {
     });
   });
   
-  // Delete button logic
+// Delete button logic
 container.querySelectorAll('.delete-button').forEach(button => {
   button.addEventListener('click', (e) => {
     if(e.target.matches('.delete-button')) {
-      const orderId = e.target.dataset.id;
-      console.log('Deleting order:', orderId);
+      const id = e.target.dataset.id;
+      console.log('Deleting order:', id);
       // Make API call to delete order
-      fetch(`/api/orders/delete/${orderId}`, {
+      fetch(`/api/orders/delete/${id}`, {
         method: 'DELETE'
       })
       .then(response => {
@@ -118,14 +118,19 @@ container.querySelectorAll('.delete-button').forEach(button => {
           // Remove the corresponding row from the table
           const row = e.target.closest('tr');
           row.remove();
+        } else if (response.status === 404) {
+          console.log('Order not found');
+          // Optionally display a message indicating that the order doesn't exist
         } else {
           console.error('Failed to delete order');
+          // Optionally display an error message
         }
       })
       .catch(err => console.error(err));
     }
   });
 });
+
 
 };
 
