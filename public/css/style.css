@@ -1,3 +1,14 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
 /* CSS for table container */
 .table-container {
   overflow-x: auto; /* Enable horizontal scrolling when needed */
@@ -5,15 +16,16 @@
 
 /* Rest of your CSS */
 body {
-  background-color: rgb(253, 253, 253);
+  background-color: rgb(224, 219, 199); 
   color: rgb(0, 0, 0);
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  font-family: Roboto, Helvetica, Arial, sans-serif
 }
 
 header {
-  background-color: #f0f0f0;
+  background-color: rgb(118, 147, 147); 
+  border-bottom: 1px solid rgb(144, 0, 32);
   padding: 20px;
   text-align: center;
 }
@@ -21,7 +33,9 @@ header {
 .grouping-div {
 	display: flex;
 	justify-content: space-between;
+  align-items: center;
 }
+
 
 /* Modal container */
 .modal {
@@ -33,21 +47,21 @@ header {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.664);
+  background-color: rgba(0, 0, 0, 0.87);
 }
 
 /* Modal content */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #f0f0f0;
   margin: 15% auto;
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid rgb(144, 0, 32);
   width: 80%;
 }
 
 /* Close button */
 .close {
-  color: #aaa;
+  color: #636363;
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -55,7 +69,7 @@ header {
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: rgb(144, 0, 32);
   text-decoration: none;
   cursor: pointer;
 }
@@ -88,7 +102,7 @@ label {
 input[type="text"] {
   width: calc(100% - 12px);
   padding: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #9e9e9e;
   border-radius: 4px;
 }
 
@@ -99,39 +113,82 @@ h1 {
 }
 
 nav {
-  margin-top: 10px;
+  background-color: #f0f0f0;  
+  margin-top: 21px;
+  padding: 12px 36px 12px 36px;
+  border: 1px solid rgb(144, 0, 32);
 }
 
 nav a {
   text-decoration: none;
+  font-weight:600;
   color: black;
   margin-right: 10px;
+  padding: 10px 20px; 
+  border-radius: 5px; 
+
+}
+
+nav a:hover {
+  background-color: rgba(118, 147, 147, 0.87);
+  color: rgb(144, 0, 32);
+  font-weight:600;
+
+}
+
+.sales-date {
+  margin-left:8px;
 }
 
 .new-order-section, .select-section {
+  margin-top: 30px;
   padding: 10px;
   text-align: center;
 }
 
 .new-order-btn {
-  background-color: #007bff;
+  background-color: rgb(118, 147, 147);
   color: white;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  border: 2px solid rgba(93, 107, 107, 0.801);
   border-radius: 5px;
 }
-
+.new-order-btn:hover {
+  background-color: rgb(100, 128, 128);
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 0 10px rgb(0, 0, 0);
+}
 .select-section select {
   padding: 8px;
   font-size: 16px;
+  border: 1px solid rgb(144, 0, 32); 
+  border-radius: 6px; 
+
 }
 
+section {
+  margin-bottom: 42px; 
+}
+
+main {
+  padding-left: 8px;
+  padding-right: 9px;
+}
 #processed-orders-container, #pending-orders-container , #orders-container {
   margin-top: 20px;
+  margin-bottom: 20px;
   background-color: #f0f0f0;
   padding: 20px;
+  border: 3px solid rgb(199, 194, 175);
+  box-shadow: 0 3px 18px rgb(75, 73, 67)
+}
+
+#processed-orders-container, #pending-orders-container {
+  height: 444px;
 }
 
 table {
@@ -151,11 +208,12 @@ tr:nth-child(even) {
 }
 
 .completed {
-  background-color: rgba(0, 207, 0, 0.247) !important; /* Background color for completed orders */
+  background-color: rgb(205, 232, 255)!important; /* Background color for completed orders */
 }
 
 .complete-btn {
-  background-color: rgba(0, 207, 0, 0.247);
+  background-color: rgba(144, 0, 32);
+  color:rgb(152, 175, 175);
   font-size: large;
   padding: 9px;
   border-radius: 12px;
@@ -163,8 +221,9 @@ tr:nth-child(even) {
 
 .complete-btn.enabled {
   cursor: pointer;
-  background-color: rgba(94, 207, 94, 0.534);
-  border-color: rgba(2, 51, 212, 0.726);
+  background-color: rgb(110, 2, 25);
+  color: white;
+  border-color: rgba(118, 147, 147);
 }
 
 .delete-button {
@@ -194,6 +253,64 @@ tr:nth-child(even) {
 }
 
 .processed-button:hover {
-  background-color: rgba(48, 145, 39, 0.733);
+  background-color: rgba(85, 199, 75, 0.733);
   box-shadow: rgb(251, 255, 0) 0 1px 1px;
+}
+
+
+footer {
+  background-color: rgb(224, 219, 199); /* Change footer background color */
+  margin-top: 69px;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid rgb(196, 192, 174);
+}
+
+footer p, cite {
+  font-weight: 600;
+}
+
+
+footer ul {
+  padding: 9px;
+  list-style: none;
+}
+
+footer ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+address {
+  margin-top: 10px; /* Add margin top to address */
+}
+
+/* Additional CSS for responsiveness */
+@media only screen and (max-width: 768px) {
+  header {
+    padding: 10px; /* Reduce header padding for smaller screens */
+  }
+
+  nav a {
+    padding: 8px 16px; 
+    display: block;
+    border-bottom: 1px solid rgb(144, 0, 32);
+  }
+
+  .new-order-btn {
+    padding: 8px 16px; /* Adjust button padding for smaller screens */
+    font-size: 14px; /* Reduce button font size for smaller screens */
+  }
+
+  footer {
+    padding: 10px; /* Reduce footer padding for smaller screens */
+  }
+
+  footer ul li {
+    margin-right: 9px; /* Adjust margin between footer list items for smaller screens */
+  }
+
+  address {
+    margin-top: 5px; /* Adjust margin top for address for smaller screens */
+  }
 }
